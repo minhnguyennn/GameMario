@@ -60,7 +60,7 @@ int BackBufferHeight = 0;
 
 #define TEXTURE_PATH_BRICK L"brick.png"
 #define BRICK_START_X 8.0f
-#define BRICK_START_Y 100.0f
+#define BRICK_START_Y 200.0f
 
 #define BRICK_START_VX 0.2f
 
