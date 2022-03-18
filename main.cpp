@@ -197,7 +197,7 @@ void InitDirectX(HWND hWnd)
 	pD3DDevice->RSSetViewports(1, &viewPort);
 
 
-	// create the sprite object to handle sprite drawing 
+	// create the sprite object to handle sprite drawing Nguyen Van Minh
 	hr = D3DX10CreateSprite(pD3DDevice, 0, &spriteObject);
 
 	// Make sure the sprite creation was successful
