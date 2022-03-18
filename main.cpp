@@ -60,7 +60,7 @@ int BackBufferHeight = 0;
 
 #define TEXTURE_PATH_BRICK L"brick.png"
 #define BRICK_START_X 8.0f
-#define BRICK_START_Y 200.0f
+#define BRICK_START_Y 100.0f
 
 #define BRICK_START_VX 0.2f
 
@@ -197,7 +197,7 @@ void InitDirectX(HWND hWnd)
 	pD3DDevice->RSSetViewports(1, &viewPort);
 
 
-	// create the sprite object to handle sprite drawing Nguyen Van Minh
+	// create the sprite object to handle sprite drawing 
 	hr = D3DX10CreateSprite(pD3DDevice, 0, &spriteObject);
 
 	// Make sure the sprite creation was successful
