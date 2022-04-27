@@ -1,48 +1,48 @@
 #include "Scene.h"
-#include"GlobalUtil.h"
-#include"Game.h"
-#include"../EntityList.h"
+#include "../GlobalUtil.h"
+#include "../Game.h"
+//#include"../EntityList.h"
 
-bool Scene::_IsEntityInViewport(Entity* entity, RECTF viewport) const {
-	if (entity->GetObjectType() < GameObject::GameObjectType::GAMEOBJECT_TYPE_GOOMBA ||
-		entity->GetObjectType() == GameObject::GameObjectType::GAMEOBJECT_TYPE_TAIL ||
-		entity->GetObjectType() == GameObject::GameObjectType::GAMEOBJECT_TYPE_DOOR ||
-		entity->GetObjectType() == GameObject::GameObjectType::GAMEOBJECT_TYPE_MOVINGCEILING)
-	{
-		return true;
-	}
+//bool Scene::_IsEntityInViewport(Entity* entity, RECTF viewport) const {
+//	if (entity->GetObjectType() < GameObject::GameObjectType::GAMEOBJECT_TYPE_GOOMBA ||
+//		entity->GetObjectType() == GameObject::GameObjectType::GAMEOBJECT_TYPE_TAIL ||
+//		entity->GetObjectType() == GameObject::GameObjectType::GAMEOBJECT_TYPE_DOOR ||
+//		entity->GetObjectType() == GameObject::GameObjectType::GAMEOBJECT_TYPE_MOVINGCEILING)
+//	{
+//		return true;
+//	}
+//
+//	float entityWidth = entity->GetPosition().x + entity->GetBoxWidth();
+//	float entityHeight = entity->GetPosition().y + entity->GetBoxHeight();
+//	if (entityWidth >= viewport.left && entityHeight >= viewport.top &&
+//		entity->GetPosition().x <= viewport.right &&
+//		entity->GetPosition().y <= viewport.bottom)
+//	{
+//		return true;
+//	}
+//	return false;
+//}
 
-	float entityWidth = entity->GetPosition().x + entity->GetBoxWidth();
-	float entityHeight = entity->GetPosition().y + entity->GetBoxHeight();
-	if (entityWidth >= viewport.left && entityHeight >= viewport.top &&
-		entity->GetPosition().x <= viewport.right &&
-		entity->GetPosition().y <= viewport.bottom)
-	{
-		return true;
-	}
-	return false;
-}
-
-bool Scene::_IsEntityAliveAndIB(Entity* entity) const {
-	if (entity->GetObjectType() < GemeObject::GameObjectType::GAMEOBJECT_TYPE_GOOMBA || entity->GetObjectType() == GameObject::GameObjectType::GAMEOBJECT_TYPE_TAIL ||
-		entity->GetObjectType() == GameObject::GameObjectType::GAMEOBJECT_TYPE_DOOR ||
-		entity->GetObjectType() == GameObject::GameObjectType::GAMEOBJECT_TYPE_MOVINGCEILING)
-	{
-		return true;
-	}
-
-	float entityWidth = entity->GetPosition().x + entity->GetBoxWidth();
-	float entityHeight = entity->GetPosition().y + entity->GetBoxHeight();
-	if (entity->GetHealth() > -1 && (entityWidth >= 0 &&
-		entityHeight >= 0 &&
-		entity->GetPosition().x <= _sceneWidth &&
-		entity->GetPosition().y <= _sceneHeight))
-	{
-		return true;
-	}
-	entity->flaggedForRemoval = true;
-	return false;
-}
+//bool Scene::_IsEntityAliveAndIB(Entity* entity) const {
+//	if (entity->GetObjectType() < GemeObject::GameObjectType::GAMEOBJECT_TYPE_GOOMBA || entity->GetObjectType() == GameObject::GameObjectType::GAMEOBJECT_TYPE_TAIL ||
+//		entity->GetObjectType() == GameObject::GameObjectType::GAMEOBJECT_TYPE_DOOR ||
+//		entity->GetObjectType() == GameObject::GameObjectType::GAMEOBJECT_TYPE_MOVINGCEILING)
+//	{
+//		return true;
+//	}
+//
+//	float entityWidth = entity->GetPosition().x + entity->GetBoxWidth();
+//	float entityHeight = entity->GetPosition().y + entity->GetBoxHeight();
+//	if (entity->GetHealth() > -1 && (entityWidth >= 0 &&
+//		entityHeight >= 0 &&
+//		entity->GetPosition().x <= _sceneWidth &&
+//		entity->GetPosition().y <= _sceneHeight))
+//	{
+//		return true;
+//	}
+//	entity->flaggedForRemoval = true;
+//	return false;
+//}
 
 unsigned int Scene::_GetNextThemeID() {
 	auto it = std::find(_mainThemeIDs.begin(), _mainThemeIDs.end(), _currentThemeID);
@@ -149,9 +149,9 @@ void Scene::_ParseCameraBounds(std::string line) {
 	cameraBound.bottom = std::stof(tokens.at(3));
 
 	float upVector = std::stof(tokens.at(4));
-	_cameraInstance->AddUpVector(upVector);
+	//_cameraInstance->AddUpVector(upVector);
 
-	_cameraInstance->AddCameraBound(cameraBound);
+	//_cameraInstance->AddCameraBound(cameraBound);
 }
 
 void Scene::_ParseBackgroundColor(std::string line) {
@@ -179,12 +179,17 @@ void Scene::_ParseTextures(std::string line) {
 }
 
 void Scene::_ParseEntityData(std::string line) {
+	//
+}
+
+void Scene::_ParseTileData(std::string line) {
 	std::vector<std::string> tokens = GlobalUtil::SplitStr(line);
+
 	if (tokens.size() < 5) {
 		return;
 	}
 
-	GameObject::GameObjectType objectType = static_cast<GameObject::GameObjectType>(std::stoul(tokens.at(0)));
+	//GameObject::GameObjectType objectType = static_cast<GameObject::GameObjectType>(std::stoul(tokens.at(0)));
 
 	float x = std::stof(tokens.at(1));
 	float y = std::stof(tokens.at(2));
@@ -197,17 +202,17 @@ void Scene::_ParseEntityData(std::string line) {
 	hitbox.right = std::stof(tokens.at(3));
 	hitbox.bottom = std::stof(tokens.at(4));
 
-	Tile* tile = new Tile;
+	/*Tile* tile = new Tile;
 	tile->SetOjectType(objectType);
 	tile->SetPosition(position);
 	tile->AddHitbox(hitbox);
 
-	_tiles.emplace_back(tile);
+	_tiles.emplace_back(tile);*/
 }
 
 void Scene::_ParseGrid(std::string line) {
-	_grid = new Grid;
-	_grid->ParseData(line, _entities);
+	/*_grid = new Grid;
+	_grid->ParseData(line, _entities);*/
 }
 
 void Scene::_ParseMainEffect(std::string line) {
@@ -217,16 +222,16 @@ void Scene::_ParseMainEffect(std::string line) {
 		return;
 	}
 
-	GameObject::GameObjectType objectType = static_cast<GameObject::GameObjectType>(std::stoul(tokens.at(0)));
+	//GameObject::GameObjectType objectType = static_cast<GameObject::GameObjectType>(std::stoul(tokens.at(0)));
 	unsigned int textureID = std::stoul(tokens.at(2));
 	Texture* texture = GetTexture(textureID);
 
-	_scorePopUp = new ScorePopUp(_player);
+	/*_scorePopUp = new ScorePopUp(_player);
 	_scorePopUp->SetOjectType(objectType);
-	_scorePopUp->ParseData(tokens.at(1), texture);
+	_scorePopUp->ParseData(tokens.at(1), texture);*/
 }
 
-void Scene::_ParseHud(std::string line) {
+void Scene::_ParseHUD(std::string line) {
 	std::vector<std::string> tokens = GlobalUtil::SplitStr(line);
 
 	if (tokens.size() < 2) {
@@ -236,18 +241,18 @@ void Scene::_ParseHud(std::string line) {
 	unsigned int textureID = std::stoul(tokens.at(1));
 	Texture* texture = GetTexture(textureID);
 
-	_hud = new HUD(_player);
-	_hud->ParseData(tokens.at(0), texture);
+	/*_hud = new HUD(_player);
+	_hud->ParseData(tokens.at(0), texture);*/
 }
 
-void Scene::_ParseBackground(std:string line) {
+void Scene::_ParseBackground(std::string line) {
 	std::vector<std::string> tokens = GlobalUtil::SplitStr(line);
 
 	if (tokens.size() == 1) {
 		unsigned int textureID = std::stoul(tokens.at(0));
 		Texture* texture = GetTexture(textureID);
 
-		_background = new Background(texture);
+		//_background = new Background(texture);
 		return;
 	}
 
@@ -265,7 +270,7 @@ void Scene::_ParseBackground(std:string line) {
 	float y = std::stof(tokens.at(5));
 	D3DXVECTOR2 position = D3DXVECTOR2(x, y);
 
-	_background->AddSprite(spriteBound, position);
+	//_background->AddSprite(spriteBound, position);
 }
 
 Scene::Scene(SceneType sceneID, std::string path) {
@@ -276,7 +281,7 @@ Scene::Scene(SceneType sceneID, std::string path) {
 
 Scene::~Scene(){}
 
-bool Scene::IsTransitionToScene() const {
+bool Scene::IsTransitioningToScene() const {
 	return _toSceneStart != 0;
 }
 
@@ -300,7 +305,7 @@ D3DXCOLOR Scene::GetBGColor() const {
 	return _backgroundColor;
 }
 
-Texture* Scene::GetTextTure(unsigned int id) const{
+Texture* Scene::GetTexture(unsigned int id) const{
 	if (_textureMap.find(id) == _textureMap.end()) {
 		char debug[100];
 		sprintf_s(debug, "[SCENE] No valid texture with the corresponding ID: %lu\n", id);
@@ -316,70 +321,70 @@ void Scene::OnKeyUp(int keyCode) {}
 
 void Scene::OnKeyDown(int keyCode) {}
 
-void Scene::AddEntityToScene(Entity* entity) {
-	_entities.emplace_back(entity);
-	if (_grid != nullptr) {
-		_grid->AddEntity(entity);
-	}
-}
+//void Scene::AddEntityToScene(Entity* entity) {
+//	_entities.emplace_back(entity);
+//	if (_grid != nullptr) {
+//		_grid->AddEntity(entity);
+//	}
+//}
 
-void Scene::RemoveEntityFromScene(Entity* entity) {
-	if (_grid != nullptr) {
-		_grid->RemoveEntity(entity);
-	}
-	_entities.erase(std::remove(_entities.begin(), _entities.end(), entity), _entities.end());
-}
+//void Scene::RemoveEntityFromScene(Entity* entity) {
+//	if (_grid != nullptr) {
+//		_grid->RemoveEntity(entity);
+//	}
+//	_entities.erase(std::remove(_entities.begin(), _entities.end(), entity), _entities.end());
+//}
 
-Entity* Scene::CreateEntityFromData(std::string objectID, std::string dataPath, std::string textureID) {
-	Entity* entity = nullptr;
-
-	GameObject::GameObjectType objectType = static_cast<GameObject::GameObjectType>(std::stoul(objectID));
-	unsigned int texID = std::stoul(textureID);
-	Texture* texture = GetTexture(texID);
-
-	switch (objectType) {
-		//Projectiles
-	case GameObject::GameObjectType::GAMEOBJECT_TYPE_PLAYERFIREBALL:
-	case GameObject::GameObjectType::GAMEOBJECT_TYPE_VENUSFIREBALL:
-		entity = new Fireball;
-		break;
-	case GameObject::GameObjectType::GAMEOBJECT_TYPE_BOOMERANG:
-		entity = new Boomerang;
-		break;
-		//Items
-	case GameObject::GameObjectType::GAMEOBJECT_TYPE_REDMUSHROOM:
-	case GameObject::GameObjectType::GAMEOBJECT_TYPE_GREENMUSHROOM:
-		entity = new Mushroom;
-		break;
-	case GameObject::GameObjectType::GAMEOBJECT_TYPE_LEAF:
-		entity = new Leaf;
-		break;
-	case GameObject::GameObjectType::GAMEOBJECT_TYPE_FLOWER:
-		entity = new Flower;
-		break;
-	case GameObject::GameObjectType::GAMEOBJECT_TYPE_COIN:
-		entity = new Coin;
-		break;
-	case GameObject::GameObjectType::GAMEOBJECT_TYPE_ORB:
-		entity = new Orb;
-		break;
-		//Animated blocks
-	case GameObject::GameObjectType::GAMEOBJECT_TYPE_PBLOCK:
-		entity = new PBlock;
-		break;
-		//Effects
-	case GameObject::GameObjectType::GAMEOBJECT_TYPE_BRICKEFFECT:
-		entity = new BrickDebris;
-		break;
-	case GameObject::GameObjectType::GAMEOBJECT_TYPE_ORBEFFECT:
-		entity = new OrbEffect;
-		break;
-	}
-
-	entity->SetOjectType(objectType);
-	entity->ParseData(dataPath, texture);
-	return entity;
-}
+//Entity* Scene::CreateEntityFromData(std::string objectID, std::string dataPath, std::string textureID) {
+//	Entity* entity = nullptr;
+//
+//	GameObject::GameObjectType objectType = static_cast<GameObject::GameObjectType>(std::stoul(objectID));
+//	unsigned int texID = std::stoul(textureID);
+//	Texture* texture = GetTexture(texID);
+//
+//	switch (objectType) {
+//		//Projectiles
+//	case GameObject::GameObjectType::GAMEOBJECT_TYPE_PLAYERFIREBALL:
+//	case GameObject::GameObjectType::GAMEOBJECT_TYPE_VENUSFIREBALL:
+//		entity = new Fireball;
+//		break;
+//	case GameObject::GameObjectType::GAMEOBJECT_TYPE_BOOMERANG:
+//		entity = new Boomerang;
+//		break;
+//		//Items
+//	case GameObject::GameObjectType::GAMEOBJECT_TYPE_REDMUSHROOM:
+//	case GameObject::GameObjectType::GAMEOBJECT_TYPE_GREENMUSHROOM:
+//		entity = new Mushroom;
+//		break;
+//	case GameObject::GameObjectType::GAMEOBJECT_TYPE_LEAF:
+//		entity = new Leaf;
+//		break;
+//	case GameObject::GameObjectType::GAMEOBJECT_TYPE_FLOWER:
+//		entity = new Flower;
+//		break;
+//	case GameObject::GameObjectType::GAMEOBJECT_TYPE_COIN:
+//		entity = new Coin;
+//		break;
+//	case GameObject::GameObjectType::GAMEOBJECT_TYPE_ORB:
+//		entity = new Orb;
+//		break;
+//		//Animated blocks
+//	case GameObject::GameObjectType::GAMEOBJECT_TYPE_PBLOCK:
+//		entity = new PBlock;
+//		break;
+//		//Effects
+//	case GameObject::GameObjectType::GAMEOBJECT_TYPE_BRICKEFFECT:
+//		entity = new BrickDebris;
+//		break;
+//	case GameObject::GameObjectType::GAMEOBJECT_TYPE_ORBEFFECT:
+//		entity = new OrbEffect;
+//		break;
+//	}
+//
+//	entity->SetOjectType(objectType);
+//	entity->ParseData(dataPath, texture);
+//	return entity;
+//}
 
 void Scene::LoadScene() {
 	char debug[100];
@@ -396,7 +401,7 @@ void Scene::LoadScene() {
 
 	//Load objects here, cause the Scene won't be calling destructor before the game ends	
 	const unsigned int MAX_ENTITIES_PER_SCENE = 256;
-	_entities.reserve(MAX_ENTITIES_PER_SCENE);
+	/*_entities.reserve(MAX_ENTITIES_PER_SCENE);
 	_tiles.reserve(MAX_ENTITIES_PER_SCENE);
 
 	_player = nullptr;
@@ -410,7 +415,7 @@ void Scene::LoadScene() {
 	_hud = nullptr;
 	_background = nullptr;
 	_grid = nullptr;
-	_cameraInstance = Camera::GetInstance();
+	_cameraInstance = Camera::GetInstance();*/
 	//
 
 	_SceneFileSection sceneFileSection = _SceneFileSection::SCENEFILE_SECTION_UNKNOWN;
@@ -547,3 +552,5 @@ void Scene::UpdateCameraPosition() {}
 void Scene::Update(DWORD deltaTime) {}
 
 void Scene::Render() {}
+
+void Scene::Release() {}

@@ -39,5 +39,37 @@ namespace GlobalUtil
 	extern std::string ToStr(std::string&);
 };
 
-//typedef struct RectFloat                                                                                              
+typedef struct RectFloat {
+	float left, top, right, bottom;
 
+	RectFloat() : left(0), top(0), right(0), bottom(0) {}
+	RectFloat(float l, float t, float r, float b) : left(l), top(t), right(r), bottom(b) {}
+} RECTF;
+
+//A structure that contains a loaded texture,
+//and a shader resource view that is bound to it
+struct Texture {
+	unsigned int width = 0;
+	unsigned int height = 0;
+
+	ID3D10Texture2D* texture = nullptr;
+	ID3D10ShaderResourceView* resourceView = nullptr;
+
+	//Texture, shader resource view
+	Texture(ID3D10Texture2D* tex, ID3D10ShaderResourceView* srView) {
+		texture = tex;
+		resourceView = srView;
+
+		D3D10_TEXTURE2D_DESC desc;
+		texture->GetDesc(&desc);
+		width = desc.Width;
+		height = desc.Height;
+	}
+
+	//Use this to release resources
+	//Otherwise, release them individually
+	void Release() {
+		texture->Release();
+		resourceView->Release();
+	}
+};

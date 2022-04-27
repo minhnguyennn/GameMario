@@ -1,4 +1,7 @@
 #pragma once
+//
+#include "../GlobalUtil.h"
+
 #include"vector"
 #include"string"
 #include"fstream"
@@ -20,7 +23,7 @@ protected:
 		SCENEFILE_SECTION_UNKNOWN,
 		SCENEFILE_SECTION_MAINTHEMES,
 		SCENEFILE_SECTION_SCENESIZE,
-		SCENEFILE_SECTION_SCEWNETIME,
+		SCENEFILE_SECTION_SCENETIME,
 		SCENEFILE_SECTION_CAMERALOCKVALUE,
 		SCENEFILE_SECTION_CAMERABOUNDS,
 		SCENEFILE_SECTION_BGCOLOR,
@@ -43,8 +46,8 @@ protected:
 	std::vector<unsigned int> _mainThemeIDs;
 
 	std::string _filePath;
-	std::vector<Entity*> _entities;
-	std::vector<Entity*> _tiles;
+	/*std::vector<Entity*> _entities;
+	std::vector<Entity*> _tiles;*/
 
 	std::unordered_map<unsigned int, Texture*> _textureMap;
 
@@ -53,7 +56,7 @@ protected:
 	DWORD _toSceneStart;
 	DWORD _toSceneTime;
 
-	Camera* _cameraInstance;
+	/*Camera* _cameraInstance;
 	Background* _background;
 	HUD* _hud;
 	ScorePopUp* _scorePopUp;
@@ -64,10 +67,10 @@ protected:
 
 	SelectText* _selectText;
 
-	Grid* _grid;
+	Grid* _grid;*/
 
-	bool _IsEntityInViewport(Entity*, RECTF) const;
-	bool _IsEntityAliveAndIB(Entity*) const;
+	//bool _IsEntityInViewport(Entity*, RECTF) const;
+	//bool _IsEntityAliveAndIB(Entity*) const;
 	unsigned int _GetNextThemeID();
 
 	Texture* _LoadTexture(LPCWSTR);
@@ -105,13 +108,14 @@ public:
 	virtual void OnKeyUp(int);
 	virtual void OnKeyDown(int);
 
-	void AddEntityToScene(Entity*);
-	void RemoveEntityFromScene(Entity*);
+	//void AddEntityToScene(Entity*);
+	//void RemoveEntityFromScene(Entity*);
 
-	Entity* CreateEntityFromData(std::string, std::string, std::string);
+	//Entity* CreateEntityFromData(std::string, std::string, std::string);
 
-	virtual void LoadScwene();
+	virtual void LoadScene();
 	virtual void UpdateCameraPosition();
+	virtual void Update(DWORD);
 	virtual void Render();
 	virtual void Release();
 };
