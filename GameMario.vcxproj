@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GlobalUtil.cpp" />
     <ClCompile Include="main.cpp" />
@@ -152,6 +153,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GlobalUtil.h" />
     <ClInclude Include="scene\Scene.h" />
