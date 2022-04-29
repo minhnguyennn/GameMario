@@ -144,6 +144,7 @@
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GlobalUtil.cpp" />
+    <ClCompile Include="Hitbox.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="scene\Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GlobalUtil.h" />
+    <ClInclude Include="Hitbox.h" />
     <ClInclude Include="scene\Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Sprite.h" />
