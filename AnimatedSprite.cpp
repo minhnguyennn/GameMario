@@ -1,7 +1,8 @@
 #include "AnimatedSprite.h"
+#include"GlobalUtil.h"
 
 bool AnimatedSprite::_HasAnimation(std::string animationName) const {
-	return _sprites.find(animationName) != _sprites.end();
+	return _sprite.find(animationName) != _sprite.end();
 }
 
 void AnimatedSprite::ParseSprites(std::string line, Texture*& texture) {
@@ -26,10 +27,10 @@ void AnimatedSprite::ParseSprites(std::string line, Texture*& texture) {
 		int animationSpeed = std::stoul(tokens.at(6));
 
 		Sprite* sprite = new Sprite(texture, spriteBound, totalFrames, animationSpeed);
-		_sprites.insert(std::make_pair(tokens.at(0), sprite));
+		_sprite.insert(std::make_pair(tokens.at(0), sprite));
 	}
 	else {
-		_sprites[tokens.at(0)]->AddSpriteBound(spriteBound);
+		_sprite[tokens.at(0)]->AddSpriteBound(spriteBound);
 	}
 }
 
@@ -40,13 +41,13 @@ void AnimatedSprite::PlaySpriteAnimation(std::string animationName, D3DXVECTOR2 
 		OutputDebugStringA(debug);
 		return;
 	}
-	_sprites[animationName]->DrawSprite(position, scale, alpha);
+	_sprite[animationName]->DrawSprite(position, scale, alpha);
 }
 
 void AnimatedSprite::Release() {
-	for (auto& sprite : _sprites) {
+	for (auto& sprite : _sprite) {
 		sprite.second->Release();
 		delete sprite.second;
 	}
-	_sprites.clear();
+	_sprite.clear();
 }

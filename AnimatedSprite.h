@@ -1,7 +1,7 @@
 #pragma once
 #include"Sprite.h"
 #include"string"
-#include<unorderd_map>
+#include<unordered_map >
 class AnimatedSprite
 {
 private:
