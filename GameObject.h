@@ -1,6 +1,5 @@
 #pragma once
 
-#define NOMINMAX
 #include "Hitbox.h"
 #include <fstream>
 #include <algorithm>
