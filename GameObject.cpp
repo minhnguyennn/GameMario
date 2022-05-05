@@ -201,8 +201,8 @@ void GameObject::SweptAABB(
 		return;
 	}
 
-	entry = std::max(tEntry.x, tEntry.y);
-	exit = std::min(tExit.x, tExit.y);
+	entry = (std::max)(tEntry.x, tEntry.y);
+	exit = (std::min)(tExit.x, tExit.y);
 
 	if (entry > exit) {
 		return;

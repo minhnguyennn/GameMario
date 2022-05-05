@@ -1,6 +1,7 @@
 #include "GlobalUtil.h"
 #include "Game.h"
 #include "Sprite.h"
+
 void Sprite::_ScaleSprite(const RECT& spriteBound, D3DXVECTOR2 scale, unsigned int alpha) {
 	_sprite.TexCoord.x = spriteBound.left / static_cast<float>(_texture->width);
 	_sprite.TexCoord.y = spriteBound.top / static_cast<float>(_texture->height);

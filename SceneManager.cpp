@@ -18,6 +18,13 @@ Scene* SceneManager::_CreateScene(unsigned int sceneID, std::string scenePath) {
 	}
 }
 
+SceneManager* SceneManager::GetInstance() {
+	if (_managerInstance == nullptr) {
+		_managerInstance = new SceneManager;
+	}
+	return _managerInstance;
+}
+
 Scene* SceneManager::GetCurrentScene() {
 	return _scenes[_currentSceneID];
 }

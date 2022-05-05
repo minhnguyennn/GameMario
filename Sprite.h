@@ -1,6 +1,8 @@
 #pragma once
 //#include "Camera.h"
 #include"vector"
+#include"GameObject.h"
+
 class Sprite
 {
 private:
