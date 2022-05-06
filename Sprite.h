@@ -1,7 +1,6 @@
 #pragma once
-//#include "Camera.h"
+#include "Camera.h"
 #include"vector"
-#include"GameObject.h"
 
 class Sprite
 {
