@@ -1,6 +1,7 @@
 #include "SceneManager.h"
 #include"GlobalUtil.h"
 
+#include "scene/ScenePlay.h"
 
 SceneManager* SceneManager::_managerInstance = nullptr;
 SceneManager::SceneManager(){}
@@ -12,9 +13,9 @@ Scene* SceneManager::_CreateScene(unsigned int sceneID, std::string scenePath) {
 	/*case Scene::SceneType::SCENE_TYPE_INTRO:
 		return new SceneIntro(sceneType, scenePath);*/
 	case Scene::SceneType::SCENE_TYPE_MAP:
+		//return new SceneIntro(sceneType, scenePath);
 	default:
-		return nullptr;
-		/*return new ScenePlay(sceneType, scenePath);*/
+		return new ScenePlay(sceneType, scenePath);
 	}
 }
 
@@ -40,7 +41,7 @@ void SceneManager::ParseScenes(std::string line) {
 }
 
 void SceneManager::ChangeScene(unsigned int sceneID) {
-	_scenes[_currentSceneID]->Release();
+	_scenes[18]->Release();
 	_currentSceneID = sceneID;
 	_scenes[_currentSceneID]->LoadScene();
 }

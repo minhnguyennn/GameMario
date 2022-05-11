@@ -1,6 +1,8 @@
 #pragma once
 //
 #include "../GlobalUtil.h"
+#include "../Background.h"
+#include "../Camera.h"
 
 #include"vector"
 #include"string"
@@ -56,9 +58,11 @@ protected:
 	DWORD _toSceneStart;
 	DWORD _toSceneTime;
 
-	/*Camera* _cameraInstance;
+	/*Camera* _cameraInstance*/;
+
 	Background* _background;
-	HUD* _hud;
+
+	/*HUD* _hud;
 	ScorePopUp* _scorePopUp;
 
 	Player* _player;

@@ -2,9 +2,7 @@
 
 #include "GlobalUtil.h"
 #include "Game.h"
-//#include "Pipeline.h"
-//#include "audio/AudioService.h"
-//#include "audio/SMFAudio.h"
+
 HWND Game::_hWND = nullptr;
 HWND Game::_contentHWND = nullptr;
 
@@ -231,49 +229,48 @@ void Game::_Update(DWORD deltaTime) {
 	const int SELECT_KEY = Device::GetInstance()->GetControllerKey("SELECT");
 	const int START_KEY = Device::GetInstance()->GetControllerKey("START");
 	const int B_KEY = Device::GetInstance()->GetControllerKey("B");
-	const int A_KEY = Device::GetInstance()->GetControllerKey("A");
+	const int A_KEY = Device::GetInstance()->GetControllerKey("A");*/
 
-	_managerInstance->GetCurrentScene()->Update(deltaTime);*/
+	_managerInstance->GetCurrentScene()->Update(deltaTime);
 }
 
 void Game::_Render() {
-	/*auto device = GlobalUtil::directDevice;
+	auto device = GlobalUtil::directDevice;
 	auto spriteHandler = GlobalUtil::spriteHandler;
 	auto currentScene = _managerInstance->GetCurrentScene();
 
-	auto swapChain = _pipelineInstance->GetSwapChain();
-	auto renderTargetView = _pipelineInstance->GetRenderTargetView();
-	auto blendState = _pipelineInstance->GetBlendState();
+	auto swapChain = _swapChain;
+	auto renderTargetView = _renderTargetView;
+	auto blendState = _blendState;
 
 	device->ClearRenderTargetView(renderTargetView, currentScene->GetBGColor());
 	spriteHandler->Begin(D3DX10_SPRITE_SORT_TEXTURE | D3DX10_SPRITE_SAVE_STATE);
-	*/
 
 	//RGBA
-	/*float newBlendFactor[4] = { 0.0f };
+	float newBlendFactor[4] = { 0.0f };
 	device->OMSetBlendState(blendState, newBlendFactor, 0xffffffff);
 
 	currentScene->Render();
 	spriteHandler->End();
-	swapChain->Preset(0, 0);*/
+	swapChain->Present(0, 0);
 }
 
-Game::Game() {}
+Game::Game() {
+	_managerInstance = SceneManager::GetInstance();
+}
 
 Game::~Game() {
-	/*AudioService::GetAudio().Release();
-
-	if (_pipelineInstance != nullptr) {
+	/*if (_pipelineInstance != nullptr) {
 		_pipelineInstance->Release();
 	}
 
 	if (_deviceInstance != nullptr) {
 		_deviceInstance->Release();
-	}
+	}*/
 
 	if (_managerInstance != nullptr) {
 		_managerInstance->Release();
-	}*/
+	}
 }
 
 Game* Game::GetInstance() {
@@ -363,7 +360,7 @@ bool Game::InitGame(HWND hWND) {
 	swapChainDesc.BufferDesc.RefreshRate.Numerator = _FRAME_RATE;
 	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	swapChainDesc.OutputWindow = hWND;
+	swapChainDesc.OutputWindow = _contentHWND;
 	swapChainDesc.SampleDesc.Count = 1;
 	swapChainDesc.SampleDesc.Quality = 0;
 	swapChainDesc.Windowed = true;
@@ -475,7 +472,8 @@ bool Game::InitDevice() {
 
 void Game::LoadSettings(std::string filePath) {
 	std::ifstream readFile;
-
+	readFile.open(filePath, std::ios::in);
+	
 	if (!readFile.is_open()) {
 		OutputDebugStringA("[GAME] Failed to read file\n");
 		return;
@@ -496,11 +494,6 @@ void Game::LoadSettings(std::string filePath) {
 			continue;
 		}
 
-		if (line == "[KEYBINDS]") {
-			section = _GameFileSection::GAMEFILE_SECTION_KEYBINDS;
-			continue;
-		}
-
 		if (line == "[SETTINGS]") {
 			section = _GameFileSection::GAMEFILE_SECTION_SETTINGS;
 			continue;
@@ -512,20 +505,17 @@ void Game::LoadSettings(std::string filePath) {
 		}
 
 		switch (section) {
-		case _GameFileSection::GAMEFILE_SECTION_KEYBINDS:
-			//_deviceInstance->LoadKeyBinds(line);
-			break;
 		case _GameFileSection::GAMEFILE_SECTION_SETTINGS:
 			_ParseSettings(line);
 			break;
 		case _GameFileSection::GAMEFILE_SECTION_SCENES:
-			//_managerInstance->ParseScenes(line);
+			_managerInstance->ParseScenes(line);
 			break;
 		}
 	}
 
 	readFile.close();
-	//_managerInstance->ChangeScene(_defaultSceneID);
+	_managerInstance->ChangeScene(_defaultSceneID);
 }
 
 void Game::GameRun() {

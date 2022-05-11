@@ -1,6 +1,6 @@
 #pragma once
 #include "Camera.h"
-#include"vector"
+#include <vector>
 
 class Sprite
 {
@@ -8,7 +8,7 @@ private:
 	unsigned int _totalFrames, _currentFrame;
 	int _animationSpeed;
 	std::vector<RECT> _bounds;
-	//Camera* _cameraInstance;
+	Camera* _cameraInstance;
 	DWORD _lastFrameTime;
 	Texture* _texture;
 	D3DXMATRIX _scaleMatrix;

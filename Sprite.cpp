@@ -23,7 +23,7 @@ Sprite::Sprite(Texture*& texture, RECT spriteBound, unsigned int totalFrames, in
 	_bounds.emplace_back(spriteBound);
 	_totalFrames = totalFrames;
 	_animationSpeed = animationSpeed;
-	//_cameraInstance = Camera::GetInstance();
+	_cameraInstance = Camera::GetInstance();
 }
 
 Sprite::~Sprite() {}
@@ -53,8 +53,8 @@ void Sprite::DrawSprite(D3DXVECTOR2 position, D3DXVECTOR2 scale, unsigned int al
 		}
 	}
 
-	float x = position.x /*- _cameraInstance->GetPosition().x*/;
-	float y = (Game::GetInstance()->GetBackBufferHeight() - position.y) /*+ _cameraInstance->GetPosition().y*/;
+	float x = position.x - _cameraInstance->GetPosition().x;
+	float y = (Game::GetInstance()->GetBackBufferHeight() - position.y) *+ _cameraInstance->GetPosition().y;
 	D3DXVECTOR2 spritePosition = { floor(x), floor(y) };
 
 	_ScaleSprite(_bounds.at(_currentFrame), scale, alpha);
