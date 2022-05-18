@@ -1,4 +1,0 @@
-[SPRITES]
-HammerBro	102	183	118	199	2	100
-HammerBro	119	183	135	199
-[/]

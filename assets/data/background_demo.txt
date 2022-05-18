@@ -1,14 +1,18 @@
 [SCENESIZE]
-300	300
+2816	656
 [/]
 
 [BGCOLOR]
-0	0	255
+156	252	240
 [/]
 
 [TEXTURES]
-#UINT	STRING
 0	assets\textures\tileset.png
+1	assets\textures\player.png
+[/]
+
+[ENTITYDATA]
+0	assets\data\mario.txt	1	100	0
 [/]
 
 [BACKGROUND]

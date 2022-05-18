@@ -151,6 +151,7 @@
     <ClCompile Include="GlobalUtil.cpp" />
     <ClCompile Include="Hitbox.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="player\Player.cpp" />
     <ClCompile Include="scene\ScenePlay.cpp" />
     <ClCompile Include="scene\Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GlobalUtil.h" />
     <ClInclude Include="Hitbox.h" />
+    <ClInclude Include="player\Player.h" />
     <ClInclude Include="scene\ScenePlay.h" />
     <ClInclude Include="scene\Scene.h" />
     <ClInclude Include="SceneManager.h" />

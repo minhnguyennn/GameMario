@@ -154,9 +154,6 @@ void Entity::Update(
 			}
 		}
 
-		//Edge case: what if the entity's bounding box is larger than the grid cell size? i.e: tile->_hitbox > grid->_cellsize
-		//Use another collection (collidableTiles) and calculate the collisions
-		//Since tiles themselves are static, as in, they don't update and render every tick, performance wise it's negligible
 		CalcPotentialCollision(collidableTiles, collisionEvents);
 	}
 

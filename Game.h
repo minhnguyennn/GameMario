@@ -1,5 +1,4 @@
-//#include "Device.h"
-#include "SceneManager.h"
+#include "Device.h"
 
 class Game
 {
@@ -44,7 +43,7 @@ private:
 	ID3D10RasterizerState* _rasterizerState;
 	ID3D10BlendState* _blendState;
 
-	//Device* _deviceInstance;
+	Device* _deviceInstance;
 	SceneManager* _managerInstance;
 
 	Game();

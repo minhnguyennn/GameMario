@@ -1,7 +1,0 @@
-[SPRITES]
-Shroom	51	0	67	16	1	0
-[/]
-
-[HITBOXES]
--8	-8	14	14
-[/]

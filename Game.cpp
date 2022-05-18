@@ -66,9 +66,6 @@ LRESULT Game::_WinProc(HWND hWND, UINT message, WPARAM wParam, LPARAM lParam) {
 	case WM_CHAR:
 		switch (wParam)
 		{
-		case VK_TAB:
-			//GlobalUtil::debugMode = !GlobalUtil::debugMode;
-			break;
 		case VK_ESCAPE:
 			PostQuitMessage(0);
 			break;
@@ -222,15 +219,6 @@ void Game::_ParseSettings(std::string line) {
 }
 
 void Game::_Update(DWORD deltaTime) {
-	/*const int UP_KEY = Device::GetInstance()->GetControllerKey("Up");
-	const int LEFT_KEY = Device::GetInstance()->GetControllerKey("LEFT");
-	const int DOWN_KEY = Device::GetInstance()->GetControllerKey("DOWN");
-	const int RIGHT_KEY = Device::GetInstance()->GetControllerKey("RIGHT");
-	const int SELECT_KEY = Device::GetInstance()->GetControllerKey("SELECT");
-	const int START_KEY = Device::GetInstance()->GetControllerKey("START");
-	const int B_KEY = Device::GetInstance()->GetControllerKey("B");
-	const int A_KEY = Device::GetInstance()->GetControllerKey("A");*/
-
 	_managerInstance->GetCurrentScene()->Update(deltaTime);
 }
 
@@ -256,17 +244,14 @@ void Game::_Render() {
 }
 
 Game::Game() {
+	_deviceInstance = Device::GetInstance();
 	_managerInstance = SceneManager::GetInstance();
 }
 
 Game::~Game() {
-	/*if (_pipelineInstance != nullptr) {
-		_pipelineInstance->Release();
-	}
-
 	if (_deviceInstance != nullptr) {
 		_deviceInstance->Release();
-	}*/
+	}
 
 	if (_managerInstance != nullptr) {
 		_managerInstance->Release();
@@ -463,9 +448,9 @@ bool Game::InitGame(HWND hWND) {
 }
 
 bool Game::InitDevice() {
-	/*if (!_deviceInstance->InitKeyboard(_hWND)) {
+	if (!_deviceInstance->InitKeyboard(_hWND)) {
 		return false;
-	}*/
+	}
 
 	return true;
 }
@@ -539,16 +524,12 @@ void Game::GameRun() {
 			if (deltaTime >= ticksPerFrame) {
 				frameStart = now;
 
-				//_deviceInstance->ProcessKeyboardInputs();
+				_deviceInstance->ProcessKeyboardInputs();
 
 				_Update(deltaTime);
 				_Render();
 
 				Sleep(0);
-			}
-			else {
-				//The time has come and so have I
-				//Sleep(ticksPerFrame - deltaTime);
 			}
 		}
 	}

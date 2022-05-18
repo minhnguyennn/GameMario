@@ -74,7 +74,7 @@ public:
 	//Event results, min time, offset, normal, relative distance
 	virtual void HandleCollisionResult(LPCOLLISIONEVENT, D3DXVECTOR2&, D3DXVECTOR2&, D3DXVECTOR2&, D3DXVECTOR2&) = 0;
 	virtual void HandleOverlap(Entity*);
-	//Delta time, collidable entities, collidable tiles, grid
+	//Delta time, collidable entities, collidable tiles
 	virtual void Update(DWORD, std::vector<Entity*>* = nullptr, std::vector<Entity*>* = nullptr);
 
 	//An extension of the SweptAABB method

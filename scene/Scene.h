@@ -3,6 +3,7 @@
 #include "../GlobalUtil.h"
 #include "../Background.h"
 #include "../Camera.h"
+#include "../player/Player.h"
 
 #include"vector"
 #include"string"
@@ -48,8 +49,8 @@ protected:
 	std::vector<unsigned int> _mainThemeIDs;
 
 	std::string _filePath;
-	/*std::vector<Entity*> _entities;
-	std::vector<Entity*> _tiles;*/
+	std::vector<Entity*> _entities;
+	std::vector<Entity*> _tiles;
 
 	std::unordered_map<unsigned int, Texture*> _textureMap;
 
@@ -58,23 +59,14 @@ protected:
 	DWORD _toSceneStart;
 	DWORD _toSceneTime;
 
-	/*Camera* _cameraInstance*/;
+	Camera* _cameraInstance;
 
 	Background* _background;
 
-	/*HUD* _hud;
-	ScorePopUp* _scorePopUp;
-
 	Player* _player;
-	PropPlayer* _propMario;
-	PropPlayer* _propLuigi;
 
-	SelectText* _selectText;
-
-	Grid* _grid;*/
-
-	//bool _IsEntityInViewport(Entity*, RECTF) const;
-	//bool _IsEntityAliveAndIB(Entity*) const;
+	bool _IsEntityInViewport(Entity*, RECTF) const;
+	bool _IsEntityAliveAndIB(Entity*) const;
 	unsigned int _GetNextThemeID();
 
 	Texture* _LoadTexture(LPCWSTR);
@@ -88,7 +80,6 @@ protected:
 	void _ParseTextures(std::string);
 	void _ParseEntityData(std::string);
 	void _ParseTileData(std::string);
-	void _ParseGrid(std::string);
 	void _ParseHUD(std::string);
 	void _ParseMainEffect(std::string);
 	void _ParseBackground(std::string);
@@ -111,11 +102,6 @@ public:
 	virtual void HandleStates();
 	virtual void OnKeyUp(int);
 	virtual void OnKeyDown(int);
-
-	//void AddEntityToScene(Entity*);
-	//void RemoveEntityFromScene(Entity*);
-
-	//Entity* CreateEntityFromData(std::string, std::string, std::string);
 
 	virtual void LoadScene();
 	virtual void UpdateCameraPosition();
